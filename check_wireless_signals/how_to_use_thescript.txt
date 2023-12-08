@@ -1,0 +1,50 @@
+# What is this script about?
+This script is written to proactively send emails when clients signals are more than 
+the set threshold_signal. This works on Mikrotik radios/routers - tested on v6 and v7 ROS
+
+# Requirements
+a. The script use the module - librouteros, so you should install it.
+
+b. You need to change the routers login credentials and credentials for sending email.
+
+   -- Login credentials
+        {"host": "router1_ip", "username": "username1", "password": "password1"},
+        {"host": "router2_ip", "username": "username2", "password": "password2"},
+
+   -- Sending email credentials
+        smtp_server = "your_smtp_server"
+        smtp_port = 587
+        smtp_username = "your_email@example.com"
+        smtp_password = "your_email_password"
+        to_emails = ["recipient1@example.com", "recipient2@example.com"]
+
+# How to run a script in Ubuntu Server 
+To schedule the script to run automatically at 8 am every morning on an Ubuntu Linux box, 
+you can use the cron scheduler. Here are the steps to set it up:
+
+-- Open your terminal.
+
+Edit the crontab file for the user under which you want to run the script. Use the following command:
+
+Run command below:
+crontab -e
+
+Add the following line to the crontab file to schedule the script to run every day at 8 am:
+
+Paste the code below on your open file:
+
+0 8 * * * /usr/bin/python3 /path/to/your/script.py
+Make sure to replace /path/to/your/script.py with the actual path to your Python script. 
+If you are unsure about the Python executable path, you can find it by running which python3 in the terminal.
+
+Save the file and exit the editor.
+
+This cron schedule is set to run at 8 am every day. The 0 in the first position represents the minute, and 8 in the second position represents the hour. The asterisks in the other positions mean every day of the month, every month, and every day of the week.
+
+Make sure your Python script has the executable permission. You can grant it using the following command:
+
+--Run the command below:
+
+chmod +x /path/to/your/script.py
+This setup will automatically run your script at 8 am every day. Adjust the cron schedule according to your needs.
+
